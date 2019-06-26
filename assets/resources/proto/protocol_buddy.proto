@@ -1,0 +1,232 @@
+package protocol;
+
+enum BuddyProtoType {
+    C_2_S_BUDDY_LOAD            = 1401;
+    S_2_C_BUDDY_LOAD            = 1402;
+    C_2_S_BUDDY_LOAD_SINGLE     = 1403;
+    S_2_C_BUDDY_LOAD_SINGLE     = 1404;
+    C_2_S_BUDDY_APPLY           = 1405;
+    S_2_C_BUDDY_APPLY           = 1406;
+    C_2_S_BUDDY_APPLY_MULTI     = 1407;
+    S_2_C_BUDDY_APPLY_MULTI     = 1408;
+    C_2_S_BUDDY_CONFIRM         = 1409;
+    S_2_C_BUDDY_CONFIRM         = 1410;
+    C_2_S_BUDDY_REFUSE          = 1411;
+    S_2_C_BUDDY_REFUSE          = 1412;
+    C_2_S_BUDDY_REMOVE          = 1413;
+    S_2_C_BUDDY_REMOVE          = 1414;
+    C_2_S_BUDDY_ADD_BLACK       = 1415;
+    S_2_C_BUDDY_ADD_BLACK       = 1416;
+    C_2_S_BUDDY_REMOVE_BLACK    = 1417;
+    S_2_C_BUDDY_REMOVE_BLACK    = 1418;
+    C_2_S_BUDDY_SEARCH          = 1419;
+    S_2_C_BUDDY_SEARCH          = 1420;
+    C_2_S_BUDDY_NEAR            = 1421;
+    S_2_C_BUDDY_NEAR            = 1422;
+    C_2_S_BUDDY_APPLY_REMOVE    = 1423;
+    S_2_C_BUDDY_APPLY_REMOVE    = 1424;
+    C_2_S_BUDDY_CHAT            = 1451;
+    S_2_C_BUDDY_CHAT            = 1452;
+    C_2_S_BUDDY_CHAT_HISTORY    = 1453;
+    S_2_C_BUDDY_CHAT_HISTORY    = 1454;
+    C_2_S_BUDDY_CHAT_READ       = 1455;
+    S_2_C_BUDDY_CHAT_READ       = 1456;
+}
+
+message ChatInfo {
+    optional string direct = 1;
+    optional int32 tstamp = 2;
+    optional string context = 3;
+}
+
+message BuddyInfo {
+    required string login_name = 1;
+    optional string role_name = 2;
+    optional string head_url = 3;
+    optional int32 online = 4;
+    optional double distance = 5;
+    repeated ChatInfo chat_infos = 6;
+    optional int32 read = 7;
+}
+
+message PlayerDetails {
+    required string login_name = 1;
+    optional string role_name = 2;
+    optional string head_url = 3;
+    optional int32 online = 4;
+    optional double distance = 5;
+    optional int32 state = 6;
+    optional int32 total_round = 7;
+    optional int32 total_win = 8;
+    optional int32 max_continue_win = 9;
+    optional int32 cur_continue_win = 10;
+    optional int32 rank_star = 11;
+}
+
+message C2S_BuddyLoad {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_LOAD];
+    optional int32 buddy_type = 2;
+}
+
+message S2C_BuddyLoad {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_LOAD];
+    optional int32 ret = 2;
+    optional int32 buddy_type = 3;
+    repeated BuddyInfo members = 4;
+}
+
+message C2S_BuddyLoadSingle {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_LOAD_SINGLE];
+    optional string recvier_loginname = 2;
+    optional int32 rule_type = 3;
+}
+
+message S2C_BuddyLoadSingle {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_LOAD_SINGLE];
+    optional int32 ret = 2;
+    optional PlayerDetails player_details = 3;
+}
+
+message C2S_BuddyApply {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_APPLY];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyApply {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_APPLY];
+    optional int32 ret = 2;
+    optional int32 state = 3;
+}
+
+message C2S_BuddyApplyMulti {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_APPLY_MULTI];
+}
+
+message S2C_BuddyApplyMulti {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_APPLY_MULTI];
+}
+
+message C2S_BuddyConfirm {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_CONFIRM];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyConfirm {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_CONFIRM];
+    optional int32 ret = 2;
+    optional BuddyInfo member = 3;
+}
+
+message C2S_BuddyRefuse {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_REFUSE];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyRefuse {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_REFUSE];
+    optional int32 ret = 2;
+    optional string recvier_loginname = 3;
+}
+
+message C2S_BuddyRemove {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_REMOVE];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyRemove {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_REMOVE];
+    optional int32 ret = 2;
+    optional string recvier_loginname = 3;
+}
+
+message C2S_BuddyAddBlack {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_ADD_BLACK];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyAddBlack {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_ADD_BLACK];
+    optional int32 ret = 2;
+    optional string recvier_loginname = 3;
+}
+
+message C2S_BuddyRemoveBlack {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_REMOVE_BLACK];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyRemoveBlack {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_REMOVE_BLACK];
+    optional int32 ret = 2;
+    optional string recvier_loginname = 3;
+}
+
+message C2S_BuddySearch {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_SEARCH];
+    optional string key = 2;
+}
+
+message S2C_BuddySearch {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_SEARCH];
+    optional int32 ret = 2;
+    repeated BuddyInfo members = 3;
+}
+
+message C2S_BuddyNear {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_NEAR];
+    optional int32 dist = 2;
+    optional int32 count = 3;
+}
+
+message S2C_BuddyNear {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_NEAR];
+    optional int32 ret = 2;
+    repeated BuddyInfo members = 3;
+}
+
+message C2S_BuddyApplyRemove {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_APPLY_REMOVE];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyApplyRemove {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_APPLY_REMOVE];
+    optional int32 ret = 2;
+    optional string recvier_loginname = 3;
+}
+
+message C2S_BuddyChat {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_CHAT];
+    optional string recvier_loginname = 2;
+    optional string data = 3;
+}
+
+message S2C_BuddyChat {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_CHAT];
+    optional string sender_loginname = 2;
+    optional string recvier_loginname = 3;
+    optional string data = 4;
+}
+
+message C2S_BuddyChatHistory {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_CHAT_HISTORY];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyChatHistory {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_CHAT_HISTORY];
+    optional int32 ret = 2;
+    optional string recvier_loginname = 3;
+    repeated ChatInfo chat_infos = 4;
+}
+
+message C2S_BuddyChatRead {
+    optional BuddyProtoType type = 1 [default = C_2_S_BUDDY_CHAT_READ];
+    optional string recvier_loginname = 2;
+}
+
+message S2C_BuddyChatRead {
+    optional BuddyProtoType type = 1 [default = S_2_C_BUDDY_CHAT_READ];
+    optional int32 ret = 2;
+    optional string recvier_loginname = 3;
+}

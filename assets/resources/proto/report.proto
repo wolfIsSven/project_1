@@ -1,0 +1,37 @@
+package protocol;
+
+import "protocol_room_mj.proto";
+
+message ResultReport {
+        required int32 rule_type = 1;
+        required int32 ts = 2;
+        required int64 room_id = 3;
+        repeated DDZResultLog ddz_logs = 4;
+        repeated MJResultLog mj_logs = 5;
+}
+
+message DDZResultLog {
+        required string role_name = 1;
+        required int32 total_integal = 2;
+        repeated DDZRoundLog round_logs = 3;
+}
+
+message MJResultLog {
+        required string role_name = 1;
+        required int32 total_integal = 2;
+        repeated MjRoundLog round_logs = 3;
+}
+
+message DDZRoundLog {
+        required int32 integal = 1;
+}
+
+message ResultBriefReport {
+        required int64 ts = 1;
+        repeated ResultBriefLog logs = 2;
+}
+
+message ResultBriefLog {
+        required string role_name = 1;
+        required int32 total_integal = 2;
+}

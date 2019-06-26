@@ -1,0 +1,65 @@
+package protocol;
+
+enum MailProtoType {
+     C_2_S_MAIL_LOAD          = 801;
+     S_2_C_MAIL_LOAD          = 802;
+     C_2_S_MAIL_READ          = 803;
+     S_2_C_MAIL_READ          = 804;
+     C_2_S_MAIL_DRAW_REWARD   = 805;
+     S_2_C_MAIL_DRAW_REWARD   = 806;
+     C_2_S_MAIL_DELETE        = 807;
+     S_2_C_MAIL_DELETE        = 808;
+}
+
+message MailInfo {
+        required int64 id = 1;
+        required int32 type = 2;
+        required bool is_pattern = 3;
+        required int64 ts = 4;
+        required int32 state = 5;
+        required string title = 6;
+        required string content = 7;
+        required string rewards = 8;
+        optional string sender = 9;
+}
+message C2S_MailLoad {
+        optional MailProtoType type = 1 [default = C_2_S_MAIL_LOAD];
+        required int64 mail_ts = 2;
+}
+
+message S2C_MailLoad {
+        optional MailProtoType type = 1 [default = S_2_C_MAIL_LOAD];
+        repeated MailInfo mails = 2;
+}
+
+message C2S_MailRead {
+        optional MailProtoType type = 1 [default = C_2_S_MAIL_READ];
+        optional string mails = 2;
+}
+
+message S2C_MailRead {
+        optional MailProtoType type = 1 [default = S_2_C_MAIL_READ];
+        required int32 ret = 2;
+        repeated MailInfo read_mails = 3;
+}
+
+message C2S_MailDrawReward {
+        optional MailProtoType type = 1 [default = C_2_S_MAIL_DRAW_REWARD];
+        optional string mails = 2;
+}
+
+message S2C_MailDrawReward {
+        optional MailProtoType type = 1 [default = S_2_C_MAIL_DRAW_REWARD];
+        required int32 ret = 2;
+        repeated MailInfo drawn_mails = 3;
+}
+
+message C2S_MailDelete {
+        optional MailProtoType type = 1 [default = C_2_S_MAIL_DELETE];
+        optional string mails = 2;
+}
+
+message S2C_MailDelete {
+        optional MailProtoType type = 1 [default = S_2_C_MAIL_DELETE];
+        required int32 ret = 2;
+}

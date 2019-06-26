@@ -1,0 +1,630 @@
+package protocol;
+
+enum MainProtoType {
+     C_2_S_MAIN_TASK_LOAD       = 201;
+     S_2_C_MAIN_TASK_LOAD       = 202;
+     C_2_S_MAIN_TASK_DRAW       = 203;
+     S_2_C_MAIN_TASK_DRAW       = 204;
+     S_2_C_MAIN_TASK_UPDATE     = 206;
+
+     C_2_S_MAIN_HEAD_SETTING    = 211;
+     S_2_C_MAIN_HEAD_SETTING    = 212;
+
+     C_2_S_MAIN_REDBAG_LOAD     = 213;
+     S_2_C_MAIN_REDBAG_LOAD     = 214;
+     C_2_S_MAIN_REDBAG_DRAW     = 215;
+     S_2_C_MAIN_REDBAG_DRAW     = 216;
+     C_2_S_MAIN_REDBAG_GAIN     = 217;
+     S_2_C_MAIN_REDBAG_GAIN     = 218;
+
+     C_2_S_MAIN_WECHAT_SHARE_LOAD     = 221;
+     S_2_C_MAIN_WECHAT_SHARE_LOAD     = 222;
+     C_2_S_MAIN_WECHAT_SHARE_TASK_DRAW     = 223;
+     S_2_C_MAIN_WECHAT_SHARE_TASK_DRAW     = 224;
+     C_2_S_MAIN_WECHAT_SHARE_LOAD_DAILY    = 225;
+     S_2_C_MAIN_WECHAT_SHARE_LOAD_DAILY    = 226;
+     C_2_S_MAIN_WECHAT_SHARE_DAILY_DRAW    = 227;
+     S_2_C_MAIN_WECHAT_SHARE_DAILY_DRAW    = 228;
+
+     C_2_S_MAIN_OPEN_CHEST      = 231;
+     S_2_C_MAIN_OPEN_CHEST      = 232;
+
+     C_2_S_MAIN_SIGN            = 233;
+     S_2_C_MAIN_SIGN            = 234;     
+
+     C_2_S_MAIN_LOAD_RANK       = 235;
+     S_2_C_MAIN_LOAD_RANK       = 236;
+
+     C_2_S_MAIN_LOAD_STAT       = 237;
+     S_2_C_MAIN_LOAD_STAT       = 238;
+
+     S_2_C_MAIN_TIMER_FIELD     = 242;
+     S_2_C_MAIN_BENIFIT         = 244;
+     S_2_C_MAIN_EVENT_MESSAGE   = 246;
+     S_2_C_MAIN_SYSTEM_MESSAGE  = 248;
+     S_2_C_MAIN_MATERIALS       = 250;
+
+     C_2_S_MAIN_REDBAG_WITHDRAW = 251;
+     S_2_C_MAIN_REDBAG_WITHDRAW = 252;
+
+     C_2_S_MAIN_AD_REWARD       = 253;
+     S_2_C_MAIN_AD_REWARD       = 254;
+
+     C_2_S_MAIN_LOAD_OTHERS_STAT  = 255;
+     S_2_C_MAIN_LOAD_OTHERS_STAT  = 256;
+
+     C_2_S_MAIN_AD_TO_MINGAME   = 257;
+     S_2_C_MAIN_AD_TO_MINGAME   = 258;
+
+     C_2_S_MAIN_GOLD_REDBAG_DRAW     = 261;
+     S_2_C_MAIN_GOLD_REDBAG_DRAW     = 262;
+
+     C_2_S_MAIN_SHARE_REDBAG_DRAW     = 263;
+     S_2_C_MAIN_SHARE_REDBAG_DRAW     = 264;
+
+     C_2_S_MAIN_PROTECT_GOLDROOM_STAR = 265;
+     S_2_C_MAIN_PROTECT_GOLDROOM_STAR = 266;
+
+     C_2_S_MAIN_WHEEL = 267;
+     S_2_C_MAIN_WHEEL = 268;
+
+     C_2_S_MAIN_VIP_LOAD        = 271;
+     S_2_C_MAIN_VIP_LOAD        = 272;
+     C_2_S_MAIN_VIP_DRAW        = 273;
+     S_2_C_MAIN_VIP_DRAW        = 274;
+
+     C_2_S_MAIN_TELEBILL_CHECK = 275;
+     S_2_C_MAIN_TELEBILL_CHECK = 276;
+
+     C_2_S_MAIN_WX_SHARE        = 277;
+     S_2_C_MAIN_WX_SHARE        = 278;
+     C_2_S_MAIN_WX_SHARE_DRAW_GOLD  = 279;
+     S_2_C_MAIN_WX_SHARE_DRAW_GOLD  = 280;
+
+     C_2_S_MAIN_ROOM_INVITE     = 281;
+     S_2_C_MAIN_ROOM_INVITE     = 282;
+
+     C_2_S_MAIN_PROGRESS_REWARD     = 283;
+     S_2_C_MAIN_PROGRESS_REWARD     = 284;
+
+     C_2_S_MAIN_MATERIAL_USE     = 285;
+     S_2_C_MAIN_MATERIAL_USE     = 286;
+     C_2_S_MAIN_MATERIAL_BUY     = 287;
+     S_2_C_MAIN_MATERIAL_BUY     = 288;
+     S_2_C_MAIN_MATERIAL_BUFF_USE= 290;
+
+     S_2_C_MAIN_GOLD_RELIVE     = 292;
+     S_2_C_MAIN_SWITCHS         = 294;
+     S_2_C_MAIN_WX_MYPRO_LOGIN  = 296;
+     S_2_C_MAIN_PAY             = 298;
+}
+
+message Task {
+        required int32 id = 1;
+        required int32 state = 2;
+        optional int32 progress = 3;
+        optional int32 type = 4;
+}
+
+message C2S_TaskLoad {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_TASK_LOAD];
+        required int32 task_type = 2;
+}
+
+message S2C_TaskLoad {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_TASK_LOAD];
+        required int32 ret = 2;
+        repeated Task day_tasks = 3;
+        repeated Task main_tasks = 4;
+}
+
+message TaskReward {
+        optional int32 type = 1;
+        optional int32 value = 2;
+        optional int32 nums = 3;
+}
+
+message C2S_TaskDraw {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_TASK_DRAW];
+        required int32 task_id = 2;
+}
+
+message S2C_TaskDraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_TASK_DRAW];
+        required int32 ret = 2;
+        optional int32 task_id = 3;
+        repeated TaskReward rewards = 4;
+}
+
+message S2C_TaskUpdate {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_TASK_UPDATE];
+        repeated Task tasks = 2;
+}
+
+message C2S_MainHeadSetting {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_HEAD_SETTING];
+        optional string sign = 2;
+        optional string weixin = 3;
+}
+
+message S2C_MainHeadSetting {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_HEAD_SETTING];
+        required int32 ret = 2;
+        optional string sign = 3;
+        optional string weixin = 4;
+}
+
+message RedBag {
+        optional int64 id = 1;
+        optional int32 cash = 2;
+        optional int32 state = 3;
+        optional int32 channel = 4;
+        optional int64 create_time = 5;
+        optional int64 draw_time = 6;
+}  
+
+message C2S_MainRedBagLoad {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_REDBAG_LOAD];
+        optional int32 channel = 2;
+}
+
+message S2C_MainRedBagLoad {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_REDBAG_LOAD];
+        required int32 ret = 2;
+        optional int32 channel = 3;
+        repeated RedBag red_bags = 4;
+}
+
+message C2S_MainRedBagDraw {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_REDBAG_DRAW];
+        optional int32 channel = 2;
+        optional int64 id = 3;
+}
+
+message S2C_MainRedBagDraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_REDBAG_DRAW];
+        required int32 ret = 2;
+        optional int32 channel = 3;
+        optional int64 id = 4;
+        optional int32 cur_cash = 5;
+}
+
+message C2S_MainRedBagGain {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_REDBAG_GAIN];
+        optional int32 channel = 2;
+        optional int64 id = 3;
+}
+
+message S2C_MainRedBagGain {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_REDBAG_GAIN];
+        required int32 ret = 2;
+        optional int32 channel = 3;
+        optional int64 id = 4;
+        optional int32 cur_cash = 5;
+}
+
+message WechatInviter {
+        required string login_name = 1;
+        required string role_name = 2;
+        optional string head_url = 3;
+        optional int64 ts = 4;
+        optional string task_serial = 5;
+        optional int32 daily_draw_flag = 6;
+}  
+
+message C2S_MainWechatShareLoad {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_WECHAT_SHARE_LOAD];
+}
+
+message S2C_MainWechatShareLoad {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_WECHAT_SHARE_LOAD];
+        required int32 ret = 2;
+        repeated WechatInviter inviters = 3;
+}
+
+message C2S_MainWechatShareTaskDraw {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_WECHAT_SHARE_TASK_DRAW];
+        required string login_name = 2;
+        required int32 task_id = 3;
+}
+
+message S2C_MainWechatShareTaskDraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_WECHAT_SHARE_TASK_DRAW];
+        required int32 ret = 2;
+        optional string login_name = 3;       
+        optional int32 task_id = 4;
+        repeated TaskReward rewards = 5;
+}
+
+message C2S_MainWechatShareLoadDaily {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_WECHAT_SHARE_LOAD_DAILY];
+}
+
+message S2C_MainWechatShareLoadDaily {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_WECHAT_SHARE_LOAD_DAILY];
+        required int32 ret = 2;
+        repeated WechatInviter inviters = 3;
+        optional int32 is_bigrwd_drawn = 4;
+}
+
+message C2S_MainWechatShareDailyDraw {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_WECHAT_SHARE_DAILY_DRAW];
+        optional int32 index = 2;
+}
+
+message S2C_MainWechatShareDailyDraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_WECHAT_SHARE_DAILY_DRAW];
+        required int32 ret = 2;
+        optional int32 index = 3;
+        repeated TaskReward rewards = 4;
+}
+
+message C2S_MainOpenChest {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_OPEN_CHEST];
+}
+
+message S2C_MainOpenChest {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_OPEN_CHEST];
+        required int32 ret = 2;
+}
+
+message C2S_MainSign {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_SIGN];
+        optional int32 day = 2;
+        optional int32 is_double = 3;
+}
+
+message S2C_MainSign {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_SIGN];
+        required int32 ret = 2;
+        optional int32 day = 3;
+        repeated TaskReward rewards = 4;
+}
+
+message PlayerRank {
+        required string login_name = 1;
+        optional string role_name = 2;
+        optional string head_url = 3;
+        optional int64 rank_val = 4;
+}
+
+message C2S_MainLoadRank {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_LOAD_RANK];
+        optional int32 rank_type = 2;
+}
+
+message S2C_MainLoadRank {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_LOAD_RANK];
+        required int32 ret = 2;
+        optional int32 rank_type = 3;
+        repeated PlayerRank ranks = 4;
+        optional int32 self_rank = 5;
+        optional int32 self_rank_val = 6;
+}
+
+message PlayerStat {
+        optional int32 total_round = 1;
+        optional int32 total_win = 2;
+        optional int32 max_continue_win = 3;
+        optional int32 cur_continue_win = 4;
+        optional int32 extra1 = 5;
+        optional int32 extra2 = 6;
+        optional int32 extra3 = 7;
+        optional int32 extra4 = 8;
+        optional int32 extra5 = 9;
+}
+
+message C2S_MainLoadStat {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_LOAD_STAT];
+        optional int32 rule_type = 2;
+        optional int32 room_type = 3;
+}
+
+message S2C_MainLoadStat {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_LOAD_STAT];
+        required int32 ret = 2;
+        optional int32 rule_type = 3;
+        optional int32 room_type = 4;
+        optional PlayerStat stat = 5;
+}
+
+message C2S_MainLoadOthersStat {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_LOAD_OTHERS_STAT];
+        optional int32 rule_type = 2;
+        optional int32 room_type = 3;
+        repeated string login_names = 4;
+}
+
+message S2C_MainLoadOthersStat {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_LOAD_OTHERS_STAT];
+        required int32 ret = 2;
+        optional int32 rule_type = 3;
+        optional int32 room_type = 4;
+        repeated string login_names = 5;
+        repeated PlayerStat stats = 6;
+}
+
+message TimerField {
+        optional int32 id = 1;
+        optional int32 val = 2;
+}
+message S2C_MainTimerField {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_TIMER_FIELD];
+        repeated TimerField fields = 3;
+        repeated TimerField weekly_fields = 4;
+}
+
+message S2C_MainBenifit {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_BENIFIT];
+        optional int32 diamond = 2;
+        optional int32 charge_diamond = 3;
+        optional int32 gold = 4;
+        optional int32 fangka = 5;
+        optional int32 voucher = 6;
+        optional int32 enroll_voucher = 7;
+        optional int32 cur_redbag_cash = 8;
+        optional int32 total_redbag_cash = 9;
+        optional int32 star = 10;
+        optional int32 vip_exp = 11;
+        optional int64 first_log = 12;
+        optional int32 wheel_extra_times = 13;
+        optional int32 cur_telebill = 14;
+        optional int32 total_telebill = 15;
+}
+
+message S2C_MainEventMessage {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_EVENT_MESSAGE];
+        optional int32 msg_type = 2;
+        optional string msg_params = 3;
+}
+
+message SystemMessage {
+        optional int32 type = 1;
+        optional int32 id = 2;
+        optional string msg = 3;
+        optional int32 start_time = 4;
+        optional int32 end_time = 5;
+        optional int32 interval = 6;
+}
+
+message S2C_MainSystemMessage {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_SYSTEM_MESSAGE];
+        enum OPERATION_TYPE {
+            ADD = 1;
+            UPDATE = 2;
+            DELETE = 3;
+        };
+        optional int32 op_type = 2;
+        repeated SystemMessage messages = 3;
+}
+
+message Material {
+        optional int32 id = 1;
+        optional int32 num = 2;
+        optional int32 duration_ts = 3;
+}
+message S2C_MainMaterials {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_MATERIALS];
+        repeated Material materials = 2;
+}
+
+message C2S_MainRedbagWithdraw {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_REDBAG_WITHDRAW];
+        optional int32 cash = 2;
+}
+
+message S2C_MainRedbagWithdraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_REDBAG_WITHDRAW];
+        optional int32 ret = 2;
+}
+
+message C2S_MainTeleBillCheck {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_TELEBILL_CHECK];
+        optional int32 cash = 2;
+}
+
+message S2C_MainTeleBillCheck {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_TELEBILL_CHECK];
+        optional int32 ret = 2;
+}
+
+message C2S_MainAdReward {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_AD_REWARD];
+}
+
+message S2C_MainAdReward {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_AD_REWARD];
+        optional int32 ret = 2;
+        optional int32 ad_times = 3;
+        repeated TaskReward rewards = 4;
+}
+
+message C2S_MainAdToMinGame {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_AD_TO_MINGAME];
+        optional int32 channel = 2;
+        optional string appid = 3;
+        optional int32 try_ok = 4;
+}
+
+message S2C_MainAdToMinGame {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_AD_TO_MINGAME];
+        optional int32 ret = 2;
+}
+
+message S2C_MainGoldRelive {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_GOLD_RELIVE];
+        optional int64 room_id = 2;
+        repeated TaskReward rewards = 3;
+}
+
+message C2S_MainGoldRedbagDraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_GOLD_REDBAG_DRAW];
+        optional int32 rule_type = 2;
+        optional int32 room_type = 3;
+        optional int32 room_level = 4;
+        optional int32 step = 5;
+}
+
+message S2C_MainGoldRedbagDraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_GOLD_REDBAG_DRAW];
+        required int32 ret = 2;
+        repeated TaskReward rewards = 3;
+}
+
+message C2S_MainVipLoad {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_VIP_LOAD];
+}
+
+message S2C_MainVipLoad {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_VIP_LOAD];
+        required int32 ret = 2;
+        optional int32 vip_exp = 3;
+}
+
+message C2S_MainVipDraw {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_VIP_DRAW];
+        required int32 vip_level = 2;
+}
+
+message S2C_MainVipDraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_VIP_DRAW];
+        required int32 ret = 2;
+        optional int32 vip_level = 3;
+        optional int64 first_log = 4;
+        repeated TaskReward rewards = 5;
+}
+
+message C2S_MainWXShare {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_WX_SHARE];
+}
+
+message S2C_MainWXShare {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_WX_SHARE];
+        required int32 ret = 2;
+}
+
+message C2S_MainWXShareDrawGold {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_WX_SHARE_DRAW_GOLD];
+        required int32 share_type = 2;
+        optional string appid = 3;
+}
+
+message S2C_MainWXShareDrawGold {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_WX_SHARE_DRAW_GOLD];
+        required int32 ret = 2;
+        required int32 share_type = 3;
+        repeated TaskReward rewards = 4;
+}
+
+message C2S_MainRoomInvite {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_ROOM_INVITE];
+        required int64 room_id = 2;
+        required int32 rule_type = 3;
+        repeated string login_names = 4;
+}
+
+message S2C_MainRoomInvite {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_ROOM_INVITE];
+        required int32 ret = 2;
+        required int64 room_id = 3;
+        required int32 rule_type = 4;
+        required string send_login_name = 5;
+        required string send_role_name = 6;
+}
+
+message C2S_MainShareRedbagDraw {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_SHARE_REDBAG_DRAW];
+}
+
+message S2C_MainShareRedbagDraw {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_SHARE_REDBAG_DRAW];
+        required int32 ret = 2;
+        repeated TaskReward rewards = 3;
+}
+
+message C2S_MainProtectGoldRoomStar {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_PROTECT_GOLDROOM_STAR];
+}
+
+message S2C_MainProtectGoldRoomStar {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_PROTECT_GOLDROOM_STAR];
+        required int32 ret = 2;
+}
+
+message C2S_MainWheel {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_WHEEL];
+}
+
+message S2C_MainWheel {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_WHEEL];
+        required int32 ret = 2;
+        repeated TaskReward rewards = 3;
+}
+
+message C2S_MainProgressReward {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_PROGRESS_REWARD];
+        optional int32 is_double = 2;
+        optional int32 is_add_times = 3;
+}
+
+message S2C_MainProgressReward {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_PROGRESS_REWARD];
+        required int32 ret = 2;
+        optional int32 is_add_times = 3;
+        repeated TaskReward rewards = 4;
+}
+
+message C2S_MainMaterialUse {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_MATERIAL_USE];
+        optional int32 id = 2;
+}
+
+message S2C_MainMaterialUse {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_MATERIAL_USE];
+        required int32 ret = 2;
+        repeated TaskReward rewards = 3;
+}
+
+message C2S_MainMaterialBuy {
+        optional MainProtoType type = 1 [default = C_2_S_MAIN_MATERIAL_BUY];
+        optional int32 id = 2;
+}
+
+message S2C_MainMaterialBuy {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_MATERIAL_BUY];
+        required int32 ret = 2;
+        repeated TaskReward rewards = 3;
+}
+
+message S2C_MainMaterialBuffUse {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_MATERIAL_BUFF_USE];
+        required int32 buff_id = 2;
+        required int32 buff_type = 3;
+}
+
+message S2C_MainSwitchs {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_SWITCHS];
+        required int32 ret = 2;
+        optional int32 admin_switch = 3;
+        optional int32 gold_redbag = 4;
+        optional string close_rules = 5;
+        optional string room_diamonds = 6;
+        optional string wheel_rewards = 7;
+        optional int32 sign_doubles = 8;
+        optional int32 place_season = 9;
+        optional int32 place_end_time = 10;
+        optional int32 progress_reward_nums = 11;
+        optional string match_redbag_cashs = 12;
+}
+
+message S2C_MainWxMyproLogin {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_WX_MYPRO_LOGIN];
+        repeated TaskReward rewards = 2;
+}
+
+message S2C_MainPay {
+        optional MainProtoType type = 1 [default = S_2_C_MAIN_PAY];
+        optional int32 pay_id = 2;
+        optional int32 cash = 3;
+        optional string order_id = 4;
+}

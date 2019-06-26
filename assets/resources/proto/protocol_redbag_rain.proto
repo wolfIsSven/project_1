@@ -1,0 +1,31 @@
+package protocol;
+
+enum RedBagRainProtoType {
+    S_2_C_REDBAG_RAIN_DROP = 1501;
+    C_2_S_REDBAG_RAIN_DRAW = 1502;
+    S_2_C_REDBAG_RAIN_DRAW = 1503;
+}
+
+message RoomRedBag {
+    optional int32 id = 1;
+    optional double cash = 2;
+}
+
+message S2C_RedBagRainDrop {
+    optional RedBagRainProtoType type = 1 [default = S_2_C_REDBAG_RAIN_DROP];
+    repeated RoomRedBag redbags = 2;
+}
+
+message C2S_RedBagRainDraw {
+    optional RedBagRainProtoType type = 1 [default = C_2_S_REDBAG_RAIN_DRAW];
+    optional int32 channel = 2;
+    optional int32 id = 3;
+}
+
+message S2C_RedBagRainDraw {
+    optional RedBagRainProtoType type = 1 [default = S_2_C_REDBAG_RAIN_DRAW];
+    required int32 ret = 2;
+    optional int32 channel = 3;
+    optional int32 id = 4;
+    optional int32 cur_cash = 5;
+}

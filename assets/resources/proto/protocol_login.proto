@@ -1,0 +1,162 @@
+package protocol;
+
+enum LoginProtoType {
+     C_2_S_LOGIN              = 101;
+     S_2_C_LOGIN              = 102;
+     C_2_S_RAND_NAME          = 103;
+     S_2_C_RAND_NAME          = 104;
+     C_2_S_CREATE_ROLE        = 105;
+     S_2_C_CREATE_ROLE        = 106;
+     C_2_S_LOAD_ROLE_INFO     = 107;
+     S_2_C_LOAD_ROLE_INFO     = 108;
+     S_2_C_SERVER_TIME        = 110;
+     C_2_S_SYNC_WECHAT_INFO   = 111;
+     S_2_C_SYNC_WECHAT_INFO   = 112;
+
+     C_2_S_SWITCH_SESSION     = 121;
+     S_2_C_SWITCH_SESSION     = 122;
+}
+
+message C2S_Login {
+        optional LoginProtoType type = 1 [default = C_2_S_LOGIN];
+        required string login_name = 2;
+        required int32 uid = 3;
+        required string pf = 4;
+        required string device_id = 5;
+        required int32 timestamp = 6;
+        optional string nick_name = 7;
+        optional int32 sex = 8;
+        optional string head_url = 9;
+        required string ticket = 10;
+        optional string invite_login_name = 11;
+        optional int32 share_id = 12;
+        optional int32 platform_uid = 13;
+        optional int32 scene = 14;
+        optional string refer_appid = 15;
+        optional string refer_extradata = 16;
+}
+message S2C_Login {
+        optional LoginProtoType type = 1 [default = S_2_C_LOGIN];
+        required int32 ret = 2;
+        optional string login_name = 3;
+        optional int32 uid = 4;
+        optional string role_name = 5;
+        optional string head_url = 6;
+        optional string sign = 7;
+        optional string weixin = 8;
+        optional int32 diamond = 9;
+        optional int32 gold = 10;
+        optional int32 fangka = 11;
+        optional int32 voucher = 12;
+        optional int32 enroll_voucher = 13;
+        optional int32 cur_redbag_cash = 14;
+        optional int32 total_redbag_cash = 15;
+        optional int32 rule_type = 16;
+        optional int64 room_id = 17;
+        optional int32 room_type = 18;
+        optional int32 room_level = 19;
+        optional string ip = 20;
+        optional int32 belong_match_id = 21;
+        optional int32 belong_redbag_match_id = 22;
+        optional int32 star = 23;
+        optional int32 vip_exp = 24;
+        optional string close_rules = 25;
+        optional int64 first_log = 26;
+        optional int32 admin_switch = 27;
+        optional string room_diamonds = 28;
+        optional string wheel_rewards = 29; 
+        optional int32 wheel_extra_times = 30;
+        optional int32 sign_doubles = 31;
+        optional int32 place_season = 32;
+        optional int32 place_end_time = 33;
+        optional int32 progress_reward_nums = 34;
+        optional string geo_province = 35;
+        optional string geo_city = 36;
+        optional string geo_district = 37;
+        optional string match_redbag_cashs = 38;
+        optional int32 cur_telebill = 39;
+        optional int32 total_telebill = 40;
+        optional int32 create_scene = 41;
+        optional string create_refer_appid = 42;
+        optional int32 total_online_time = 43;
+}
+
+message C2S_RandName {
+        optional LoginProtoType type = 1 [default = C_2_S_RAND_NAME];
+        required int32 sex = 2;
+}
+message S2C_RandName {
+        optional LoginProtoType type = 1 [default = S_2_C_RAND_NAME];
+        required int32 ret = 2;
+        required string name = 3;
+}
+
+message C2S_CreateRole {
+        optional LoginProtoType type = 1 [default = C_2_S_CREATE_ROLE];
+}
+message S2C_CreateRole {
+        optional LoginProtoType type = 1 [default = S_2_C_CREATE_ROLE];
+        required int32 ret = 2;
+}
+
+message C2S_LoadRoleInfo {
+        optional LoginProtoType type = 1 [default = C_2_S_LOAD_ROLE_INFO];
+        required string login_name = 2;
+}
+message S2C_LoadRoleInfo {
+        optional LoginProtoType type = 1 [default = S_2_C_LOAD_ROLE_INFO];
+        required int32 ret = 2;
+        optional string login_name = 3;
+        optional string role_name = 4;
+        optional string head_url = 5;
+        optional int32 diamond = 6;
+        optional int32 rule_type = 7;
+        optional int64 room_id = 8;
+        optional int32 room_type = 9;
+}
+
+message S2C_ServerTime {
+        optional LoginProtoType type = 1 [default = S_2_C_SERVER_TIME];
+        required int32 time = 2;
+}
+
+message C2S_SyncWechatInfo {
+        optional LoginProtoType type = 1 [default = C_2_S_SYNC_WECHAT_INFO];
+        optional string nick_name = 2;
+        optional int32 sex = 3;
+        optional string head_url = 4;
+}
+message S2C_SyncWechatInfo {
+        optional LoginProtoType type = 1 [default = S_2_C_SYNC_WECHAT_INFO];
+        required int32 ret = 2;
+}
+
+message C2S_SwitchSession {
+        optional LoginProtoType type = 1 [default = C_2_S_SWITCH_SESSION];
+        required string login_name = 2;
+}
+message S2C_SwitchSession {
+        optional LoginProtoType type = 1 [default = S_2_C_SWITCH_SESSION];
+        required int32 ret = 2;
+        optional string login_name = 3;
+        optional int32 diamond = 4;
+        optional int32 gold = 5;
+        optional int32 fangka = 6;
+        optional int32 voucher = 7;
+        optional int32 enroll_voucher = 8;
+        optional int32 cur_redbag_cash = 9;
+        optional int32 total_redbag_cash = 10;
+        optional int32 star = 11;
+        optional int32 rule_type = 12;
+        optional int64 room_id = 13;
+        optional int32 room_type = 14;
+        optional int32 room_level = 15;
+        optional int32 belong_match_id = 16;
+        optional int32 belong_redbag_match_id = 17;
+        optional int32 admin_switch = 18;
+        optional int32 cur_telebill = 19;
+        optional int32 total_telebill = 20;
+        optional int32 create_scene = 21;
+        optional string create_refer_appid = 22;
+        optional int32 total_online_time = 23;
+}

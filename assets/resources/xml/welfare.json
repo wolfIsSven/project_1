@@ -1,0 +1,32 @@
+[
+    {
+        "_id": "1",
+        "_name": "1W金币",
+        "_icon": "icon0020",
+        "_describe": "",
+        "_limit": "999",
+        "_sell": "0",
+        "_cost_text": "11,29,0",
+        "_reward_text": "1,10000,0"
+    },
+    {
+        "_id": "2",
+        "_name": "10W金币",
+        "_icon": "icon0020",
+        "_describe": "",
+        "_limit": "999",
+        "_sell": "0",
+        "_cost_text": "11,280,0",
+        "_reward_text": "1,100000,0"
+    },
+    {
+        "_id": "3",
+        "_name": "10张报名券",
+        "_icon": "icon0035",
+        "_describe": "",
+        "_limit": "999",
+        "_sell": "0",
+        "_cost_text": "11,55,0",
+        "_reward_text": "10,10,0"
+    }
+]

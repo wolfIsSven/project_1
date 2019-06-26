@@ -1,0 +1,88 @@
+package protocol;
+
+enum MatchProtoType {
+     C_2_S_MATCH_LOAD          = 1001;
+     S_2_C_MATCH_LOAD          = 1002;
+     C_2_S_MATCH_ENROLL        = 1003;
+     S_2_C_MATCH_ENROLL        = 1004;
+     C_2_S_MATCH_EXIT          = 1005;
+     S_2_C_MATCH_EXIT          = 1006;
+
+     S_2_C_MATCH_START         = 1020;
+     S_2_C_MATCH_STATE         = 1022;
+     S_2_C_MATCH_ENROLL_STATE  = 1024;
+}
+
+message C2S_MatchLoad {
+        optional MatchProtoType type = 1 [default = C_2_S_MATCH_LOAD];
+        optional int32 unique_id = 2;
+        optional int32 rule_type = 3;
+}
+
+message Match {
+        required int32 xml_id = 1;
+        optional int32 cur_nums = 2;
+}
+message S2C_MatchLoad {
+        optional MatchProtoType type = 1 [default = S_2_C_MATCH_LOAD];
+        required int32 ret = 2;
+        optional int32 enroll_xml_id = 3;
+        repeated Match matchs = 4;
+        optional int32 belong_match_id = 5;
+}
+
+message C2S_MatchEnroll {
+        optional MatchProtoType type = 1 [default = C_2_S_MATCH_ENROLL];
+        optional int32 unique_id = 2;
+        optional int32 xml_id = 3;
+}
+
+message S2C_MatchEnroll {
+        optional MatchProtoType type = 1 [default = S_2_C_MATCH_ENROLL];
+        required int32 ret = 2;
+        optional int32 xml_id = 3;
+        optional int32 cur_nums = 4;
+}
+
+message C2S_MatchExit {
+        optional MatchProtoType type = 1 [default = C_2_S_MATCH_EXIT];
+        optional int32 unique_id = 2;
+        optional int32 xml_id = 3;
+}
+
+message S2C_MatchExit {
+        optional MatchProtoType type = 1 [default = S_2_C_MATCH_EXIT];
+        required int32 ret = 2;
+        optional int32 xml_id = 3;
+        optional int32 cur_nums = 4;
+}
+
+message S2C_MatchStart {
+        optional MatchProtoType type = 1 [default = S_2_C_MATCH_START];
+        required int32 ret = 2;
+        optional string server_id = 3;
+        optional string address = 4;
+}
+
+message MatchReward {
+        optional int32 type = 1;
+        optional int32 value = 2;
+        optional int32 nums = 3;
+}
+
+message S2C_MatchState {
+        optional MatchProtoType type = 1 [default = S_2_C_MATCH_STATE];
+        required int32 ret = 2;
+        optional int32 id = 3;
+        optional int32 xml_id = 4;
+        optional int32 state = 5;
+        optional int32 seq = 6;
+        optional int32 rank = 7;
+        optional int32 remain_room_nums = 8;
+        repeated MatchReward rewards = 9;
+}
+
+message S2C_MatchEnrollState {
+        optional MatchProtoType type = 1 [default = S_2_C_MATCH_ENROLL_STATE];
+        repeated Match matchs = 2;
+}
